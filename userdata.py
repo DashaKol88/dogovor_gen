@@ -20,7 +20,6 @@ class Customer:
         self.__firstname = firstname
 
     def set_lastname(self, lastname):
-        #        self.__lastname = self.validate_lastname(lasttname)
         self.__lastname = lastname
 
     def set_phone_number(self, phone_number):
