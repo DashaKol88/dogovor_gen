@@ -49,6 +49,13 @@ async def firstname(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             text=error_message
         )
         return
+    error_message = validate_name_and_surname_characters(update.message.text)
+    if error_message:
+        await context.bot.send_message(
+            chat_id=update.message.chat_id,
+            text=error_message
+        )
+        return
     customer.set_firstname(update.message.text)
     await update.message.reply_text("Дякую.")
     await update.message.reply_text("Наразі мені відомі такі данні про Вас:")
@@ -70,6 +77,13 @@ async def lastname(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             text=error_message
         )
         return
+    error_message = validate_name_and_surname_characters(update.message.text)
+    if error_message:
+        await context.bot.send_message(
+            chat_id=update.message.chat_id,
+            text=error_message
+        )
+        return
     customer.set_lastname(update.message.text)
     await update.message.reply_text("Дякую.")
     await update.message.reply_text("Наразі мені відомі такі данні про Вас:")
@@ -82,6 +96,13 @@ async def phonenum(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Stores the info about the user and ends the conversation."""
     user = update.message.from_user
     logger.info("Phone number of %s: %s", user.first_name, update.message.text)
+    error_message = validate_phone_number(update.message.text)
+    if error_message:
+        await context.bot.send_message(
+            chat_id=update.message.chat_id,
+            text=error_message
+        )
+        return
     customer.set_phone_number(update.message.text)
     await update.message.reply_text("Дякую.")
     await update.message.reply_text("Наразі мені відомі такі данні про вас:")
@@ -94,6 +115,13 @@ async def pas_ser(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Stores the info about the user and ends the conversation."""
     user = update.message.from_user
     logger.info("Passport series of %s: %s", user.first_name, update.message.text)
+    error_message = validate_passport_series(update.message.text)
+    if error_message:
+        await context.bot.send_message(
+            chat_id=update.message.chat_id,
+            text=error_message
+        )
+        return
     customer.set_passport_series(update.message.text)
     await update.message.reply_text("Дякую.")
     await update.message.reply_text("Наразі мені відомі такі данні про вас:")
@@ -106,6 +134,13 @@ async def pas_num(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Stores the info about the user and ends the conversation."""
     user = update.message.from_user
     logger.info("Passport number of %s: %s", user.first_name, update.message.text)
+    error_message = validate_passport_number(update.message.text)
+    if error_message:
+        await context.bot.send_message(
+            chat_id=update.message.chat_id,
+            text=error_message
+        )
+        return
     customer.set_passport_number(update.message.text)
     await update.message.reply_text("Дякую.")
     await update.message.reply_text("Наразі мені відомі такі данні про вас:")
@@ -154,6 +189,13 @@ async def tax_id(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Stores the info about the user and ends the conversation."""
     user = update.message.from_user
     logger.info("ID code of %s: %s", user.first_name, update.message.text)
+    error_message = validate_id_code(update.message.text)
+    if error_message:
+        await context.bot.send_message(
+            chat_id=update.message.chat_id,
+            text=error_message
+        )
+        return
     customer.set_id_code(update.message.text)
     await update.message.reply_text("Дякую.")
     await update.message.reply_text("Наразі мені відомі такі данні про вас:")
