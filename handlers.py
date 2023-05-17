@@ -197,6 +197,13 @@ async def pas_iss_by(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """
     user = update.message.from_user
     logger.info("Passport issued by of %s: %s", user.first_name, update.message.text)
+
+    try:
+        context.user_data['customer'].set_passport_issued_by(update.message.text)
+    except ValueError as err:
+        await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
+        return P_ISS_B
+
     context.user_data['customer'].set_passport_issued_by(update.message.text)
     await update.message.reply_text("Дякую.")
     await update.message.reply_text("Наразі мені відомі такі данні про вас:")
@@ -246,6 +253,13 @@ async def reg_address(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     """
     user = update.message.from_user
     logger.info("Registration address of %s: %s", user.first_name, update.message.text)
+
+    try:
+        context.user_data['customer'].set_registration_address(update.message.text)
+    except ValueError as err:
+        await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
+        return REG_ADDR
+
     context.user_data['customer'].set_registration_address(update.message.text)
     await update.message.reply_text("Дякую.")
     await update.message.reply_text("Наразі мені відомі такі данні про вас:")
