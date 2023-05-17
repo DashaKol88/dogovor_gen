@@ -1,3 +1,8 @@
+import re
+from datetime import date
+from datetime import datetime
+
+
 class Customer:
     __user_name = None
     __firstname = None
@@ -17,30 +22,66 @@ class Customer:
         self.__user_name = username
 
     def set_firstname(self, firstname):
-        self.__firstname = firstname
+        if len(firstname) < 2 or len(firstname) > 30:
+            raise ValueError('Ім\'я має містити від 2 до 30 символів')
+
+        ukrainian_pattern = re.compile(r"^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']+?$")
+        if not ukrainian_pattern.match(firstname):
+            raise ValueError('Ім\'я має містити лише символи українського алфавіту та апостроф.')
+
+        self.__firstname = firstname.capitalize()
 
     def set_lastname(self, lastname):
-        self.__lastname = lastname
+        if len(lastname) < 2 or len(lastname) > 40:
+            raise ValueError('Прізвище має містити від 2 до 40 символів')
+
+        ukrainian_pattern = re.compile(r"^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ'-]+?$")
+        if not ukrainian_pattern.match(lastname):
+            raise ValueError('Прізвище має містити лише символи українського алфавіту та апостроф.')
+
+        self.__lastname = lastname.capitalize()
 
     def set_phone_number(self, phone_number):
+        if len(phone_number) != 10 or not phone_number.isdigit():
+            return ValueError('Номер телефону повинен містити рівно 10 цифр.')
+
         self.__phone_number = phone_number
 
     def set_passport_series(self, passport_series):
-        self.__passport_series = passport_series
+        if len(passport_series) != 2 or not passport_series.isalpha():
+            return ValueError('Серія паспорту повинна містити рівно 2 літери.')
+
+        self.__passport_series = passport_series.upper()
 
     def set_passport_number(self, passport_number):
+        if len(passport_number) != 6 or not passport_number.isdigit():
+            return ValueError('Номер паспорту повинен містити рівно 6 цифр.')
+
         self.__passport_number = passport_number
 
     def set_passport_issued_by(self, passport_issued_by):
         self.__passport_issued_by = passport_issued_by
 
     def set_passport_issued_date(self, passport_issued_date):
+        try:
+            value = datetime.strptime(passport_issued_date, '%d.%m.%Y').date()
+        except ValueError:
+            raise ValueError('Недійсний формат дати.')
+
+        if not isinstance(value, date) or value > date.today():
+            raise ValueError('Дата вказано невірно.')
+
         self.__passport_issued_date = passport_issued_date
+        return None
+
 
     def set_registration_address(self, registration_address):
         self.__registration_address = registration_address
 
     def set_id_code(self, id_code):
+        if len(id_code) != 10 or not id_code.isdigit():
+            return ValueError('Ідентифікаційний код повинен містити рівно 10 цифр.')
+
         self.__id_code = id_code
 
     def print_info(self):
