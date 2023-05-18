@@ -27,8 +27,9 @@ def main() -> None:
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
         states={
-            FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, firstname)],
             LAST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, lastname)],
+            FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, firstname)],
+            MIDDLE_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, middle_name)],
             PHONE_NUM: [MessageHandler(filters.TEXT & ~filters.COMMAND, phonenum)],
             P_SER: [MessageHandler(filters.TEXT & ~filters.COMMAND, pas_ser)],
             P_NUM: [MessageHandler(filters.TEXT & ~filters.COMMAND, pas_num)],

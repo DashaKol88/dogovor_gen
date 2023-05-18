@@ -36,6 +36,32 @@ class Customer:
         """
         return self.__user_name
 
+    def set_lastname(self, lastname: str) -> None:
+        """
+        Sets the last name.
+
+        :param lastname: The last name.
+        :type lastname: str
+        :raises ValueError: If the last name has an invalid length or contains invalid characters.
+        """
+        if len(lastname) < 2 or len(lastname) > 40:
+            raise ValueError('Прізвище має містити від 2 до 40 символів')
+
+        ukrainian_pattern = re.compile(r"^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ'-]+?$")
+        if not ukrainian_pattern.match(lastname):
+            raise ValueError('Прізвище має містити лише символи українського алфавіту та апостроф.')
+
+        self.__lastname = lastname.capitalize()
+
+    def get_lastname(self) -> str:
+        """
+        Returns the last name.
+
+        :return: The last name.
+        :rtype: str
+        """
+        return self.__lastname
+
     def set_firstname(self, firstname: str) -> None:
         """
         Sets the first name.
@@ -87,32 +113,6 @@ class Customer:
         :rtype: str
         """
         return self.__middle_name
-
-    def set_lastname(self, lastname: str) -> None:
-        """
-        Sets the last name.
-
-        :param lastname: The last name.
-        :type lastname: str
-        :raises ValueError: If the last name has an invalid length or contains invalid characters.
-        """
-        if len(lastname) < 2 or len(lastname) > 40:
-            raise ValueError('Прізвище має містити від 2 до 40 символів')
-
-        ukrainian_pattern = re.compile(r"^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ'-]+?$")
-        if not ukrainian_pattern.match(lastname):
-            raise ValueError('Прізвище має містити лише символи українського алфавіту та апостроф.')
-
-        self.__lastname = lastname.capitalize()
-
-    def get_lastname(self) -> str:
-        """
-        Returns the last name.
-
-        :return: The last name.
-        :rtype: str
-        """
-        return self.__lastname
 
     def set_phone_number(self, phone_number: str) -> None:
         """
@@ -240,7 +240,7 @@ class Customer:
         :raises ValueError: If the registration address contains non-Ukrainian alphabet characters, apostrophe, space, digits, or punctuation marks.
         """
 
-        ukrainian_pattern = re.compile(r"^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s\d'.,-]+?$")
+        ukrainian_pattern = re.compile(r"^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s\d'.,/-]+?$")
         if not ukrainian_pattern.match(registration_address):
             raise ValueError(
                 'Має містити лише символи українського алфавіту, апостроф, пробіл,розділові знаки або цифри.')
@@ -286,8 +286,9 @@ class Customer:
         :rtype: str
         """
         info = f"<b>nickname:</b> {self.__user_name}\n" \
-               f"<b>Ім'я:</b> {self.__firstname}\n" \
                f"<b>Прізвище:</b> {self.__lastname}\n" \
+               f"<b>Ім'я:</b> {self.__firstname}\n" \
+               f"<b>По батькові:</b> {self.__middle_name}\n" \
                f"<b>Номер телефону:</b> {self.__phone_number}\n" \
                f"<b>Серія паспорту:</b> {self.__passport_series}\n" \
                f"<b>Номер паспорту:</b> {self.__passport_number}\n" \
