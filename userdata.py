@@ -3,7 +3,6 @@ from datetime import date
 from datetime import datetime
 
 
-
 class Customer:
     __user_name: str = None
     __firstname: str = None
@@ -28,6 +27,15 @@ class Customer:
         """
         self.__user_name = username
 
+    def get_username(self) -> str:
+        """
+        Returns the username.
+
+        :return: The username.
+        :rtype: str
+        """
+        return self.__user_name
+
     def set_firstname(self, firstname: str) -> None:
         """
         Sets the first name.
@@ -44,6 +52,41 @@ class Customer:
             raise ValueError('Ім\'я має містити лише символи українського алфавіту та апостроф.')
 
         self.__firstname = firstname.capitalize()
+
+    def get_firstname(self) -> str:
+        """
+        Returns the first name.
+
+        :return: The first name.
+        :rtype: str
+        """
+        return self.__firstname
+
+    def set_middle_name(self, middle_name: str) -> None:
+        """
+        Sets the middle name.
+
+        :param middle_name: The middle name.
+        :type middle_name: str
+        :raises ValueError: If the middle name has an invalid length or contains invalid characters.
+        """
+        if len(middle_name) < 2 or len(middle_name) > 30:
+            raise ValueError('По батькові має містити від 2 до 30 символів')
+
+        ukrainian_pattern = re.compile(r"^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']+?$")
+        if not ukrainian_pattern.match(middle_name):
+            raise ValueError('По батькові має містити лише символи українського алфавіту та апостроф.')
+
+        self.__middle_name = middle_name.capitalize()
+
+    def get_middle_name(self) -> str:
+        """
+        Returns the middle name.
+
+        :return: The middle name.
+        :rtype: str
+        """
+        return self.__middle_name
 
     def set_lastname(self, lastname: str) -> None:
         """
@@ -62,6 +105,15 @@ class Customer:
 
         self.__lastname = lastname.capitalize()
 
+    def get_lastname(self) -> str:
+        """
+        Returns the last name.
+
+        :return: The last name.
+        :rtype: str
+        """
+        return self.__lastname
+
     def set_phone_number(self, phone_number: str) -> None:
         """
         Sets the phone number.
@@ -74,6 +126,15 @@ class Customer:
             raise ValueError('Номер телефону повинен містити рівно 10 цифр.')
 
         self.__phone_number = phone_number
+
+    def get_phone_number(self) -> str:
+        """
+        Returns the phone number.
+
+        :return: The phone number.
+        :rtype: str
+        """
+        return self.__phone_number
 
     def set_passport_series(self, passport_series: str) -> None:
         """
@@ -88,6 +149,15 @@ class Customer:
 
         self.__passport_series = passport_series.upper()
 
+    def get_passport_series(self) -> str:
+        """
+        Returns the passport series.
+
+        :return: The passport series.
+        :rtype: str
+        """
+        return self.__passport_series
+
     def set_passport_number(self, passport_number: str) -> None:
         """
         Sets the passport number.
@@ -100,6 +170,15 @@ class Customer:
             raise ValueError('Номер паспорту повинен містити рівно 6 цифр.')
 
         self.__passport_number = passport_number
+
+    def get_passport_number(self) -> str:
+        """
+        Returns the passport number.
+
+        :return: The passport number.
+        :rtype: str
+        """
+        return self.__passport_number
 
     def set_passport_issued_by(self, passport_issued_by: str) -> None:
         """
@@ -115,6 +194,15 @@ class Customer:
             raise ValueError('Має містити лише символи українського алфавіту, апостроф, пробіл або розділові знаки.')
 
         self.__passport_issued_by = passport_issued_by
+
+    def get_passport_issued_by(self) -> str:
+        """
+        Returns the entity that issued the passport.
+
+        :return: The entity that issued the passport.
+        :rtype: str
+        """
+        return self.__passport_issued_by
 
     def set_passport_issued_date(self, passport_issued_date: str) -> None:
         """
@@ -133,7 +221,15 @@ class Customer:
             raise ValueError('Дата вказано невірно.')
 
         self.__passport_issued_date = passport_issued_date
-        return None
+
+    def get_passport_issued_date(self) -> date:
+        """
+        Returns the date when the passport was issued.
+
+        :return: The passport issued date.
+        :rtype: date
+        """
+        return self.__passport_issued_date
 
     def set_registration_address(self, registration_address: str) -> None:
         """
@@ -151,6 +247,15 @@ class Customer:
 
         self.__registration_address = registration_address
 
+    def get_registration_address(self) -> str:
+        """
+        Returns the registration address.
+
+        :return: The registration address.
+        :rtype: str
+        """
+        return self.__registration_address
+
     def set_id_code(self, id_code: str) -> None:
         """
         Sets the identification code.
@@ -163,6 +268,15 @@ class Customer:
             raise ValueError('Ідентифікаційний код повинен містити рівно 10 цифр.')
 
         self.__id_code = id_code
+
+    def get_id_code(self) -> str:
+        """
+        Returns the identification code.
+
+        :return: The identification code.
+        :rtype: str
+        """
+        return self.__id_code
 
     def print_info(self) -> str:
         """
