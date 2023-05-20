@@ -16,8 +16,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-LAST_NAME, FIRST_NAME, MIDDLE_NAME, PHONE_NUM, P_SER, P_NUM, P_ISS_B, P_ISS_D, REG_ADDR, TAX_ID, CHECK, PDF_GEN = range(
-    12)
+LAST_NAME, FIRST_NAME, MIDDLE_NAME, PHONE_NUM, P_SER, P_NUM, P_ISS_B, P_ISS_D, REG_ADDR, TAX_ID, CHECK, THANK, PDF_GEN = range(
+    13)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -334,6 +334,19 @@ async def check(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             reply_keyboard, one_time_keyboard=True, input_field_placeholder="Вірно чи невірно?"
         ),
     )
+
+    return THANK
+
+async def thanks(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Stores the selected gender and asks for a photo."""
+    user = update.message.from_user
+    logger.info("Gender of %s: %s", user.first_name, update.message.text)
+    await update.message.reply_text(
+        "I see! Please send me a photo of yourself, "
+        "so I know what you look like, or send /skip if you don't want to.",
+        reply_markup=ReplyKeyboardRemove(),
+    )
+    await update.message.reply_text("Дякую.")
 
     return ConversationHandler.END
 

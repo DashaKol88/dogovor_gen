@@ -38,6 +38,7 @@ def main() -> None:
             REG_ADDR: [MessageHandler(filters.TEXT & ~filters.COMMAND, reg_address)],
             TAX_ID: [MessageHandler(filters.TEXT & ~filters.COMMAND, tax_id)],
             CHECK: [MessageHandler(filters.Regex("^(Вірно|Невірно)$"), check)],
+            THANK: [MessageHandler(filters.TEXT & ~filters.COMMAND, thanks)],
             # PHOTO: [MessageHandler(filters.PHOTO, photo), CommandHandler("skip", skip_photo)],
             # LOCATION: [
             #     MessageHandler(filters.LOCATION, location),
