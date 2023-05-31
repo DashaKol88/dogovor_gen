@@ -1,14 +1,14 @@
 from userdata import *
 from datetime import date
+from jinja2 import Environment, FileSystemLoader
 
 # user data example
-
 CON_NUMBER = 100
 customer = Customer()
 try:
     customer.set_username("sad_user")
     customer.set_lastname("Іванов")
-    customer.set_firstname("Іван")
+    customer.set_firstname("Павло")
     customer.set_middle_name("Іванович")
     customer.set_phone_number("1234567890")
     customer.set_passport_series("АВ")
@@ -22,9 +22,6 @@ try:
 
 except ValueError as e:
     print(f"Виникла помилка: {str(e)}")
-
-html_template_path = "dogovor_with_ph.html"
-output_path = "output.html"
 
 
 def parsing_data(value):
@@ -46,12 +43,18 @@ def parsing_data(value):
     return value
 
 
-def create_html_doc(customer: Customer, html_template_path: str, output_path: str,
-                    con_number: int = CON_NUMBER) -> None:
-    with open(html_template_path, 'r', encoding='utf-8') as template_file:
-        html_template = template_file.read()
+html_template_path = "templates/dogovor_for_jinja.html"
+output_path = "output/completed_contract.html"
 
-    filled_template = html_template.format(
+
+def generate_html_doc(customer: Customer, html_template_path: str, output_path: str,
+                      con_number: int = CON_NUMBER) -> None:
+    global CON_NUMBER
+
+    env = Environment(loader=FileSystemLoader('.'))
+    template = env.get_template(html_template_path)
+
+    filled_template = template.render(
         cont_numb=str(con_number),
         day_today=parsing_data(date.today()),
         lastname=customer.get_lastname(),
@@ -69,9 +72,8 @@ def create_html_doc(customer: Customer, html_template_path: str, output_path: st
     with open(output_path, 'w', encoding='utf-8') as output_file:
         output_file.write(filled_template)
 
+    CON_NUMBER += 1
 
 
-
-create_html_doc(customer, html_template_path, output_path)
-CON_NUMBER += 1
+generate_html_doc(customer, html_template_path, output_path)
 print(CON_NUMBER)

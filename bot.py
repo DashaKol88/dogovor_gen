@@ -18,12 +18,15 @@ if __version_info__ < (20, 0, 0, "alpha", 5):
 
 
 def main() -> None:
-    """Run the bot."""
-    # Create the Application and pass it your bot's token.
+    """
+    The main function that sets up and runs the bot.
+
+    Returns:
+    - None
+    """
     load_dotenv()
     application = Application.builder().token(os.environ['BOT_TOKEN']).build()
 
-    # Add conversation handler with the states GENDER, PHOTO, LOCATION and BIO
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", start)],
         states={
@@ -37,17 +40,25 @@ def main() -> None:
             P_ISS_D: [MessageHandler(filters.TEXT & ~filters.COMMAND, pas_iss_date)],
             REG_ADDR: [MessageHandler(filters.TEXT & ~filters.COMMAND, reg_address)],
             TAX_ID: [MessageHandler(filters.TEXT & ~filters.COMMAND, tax_id)],
-            CHECK: [MessageHandler(filters.Regex("^(Вірно|Невірно)$"), check)],
-            THANK: [MessageHandler(filters.TEXT & ~filters.COMMAND, thanks)],
-            # PHOTO: [MessageHandler(filters.PHOTO, photo), CommandHandler("skip", skip_photo)],
-            # LOCATION: [
-            #     MessageHandler(filters.LOCATION, location),
-            #     CommandHandler("skip", skip_location),
-            # ],
-            # BIO: [MessageHandler(filters.TEXT & ~filters.COMMAND, bio)],
+            CORRECTION: [MessageHandler(filters.Regex(
+                "^(Ім'я|Прізвище|По батькові|Номер телефону|Серія паспорта|Номер паспорта|Ким виданий паспорт|Дата видачі паспорта|Адреса реєстрації|Ідентифікаційний код)$"),
+                handle_correction)],
+            CORRECT_LAST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_last_name)],
+            CORRECT_FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_first_name)],
+            CORRECT_MIDDLE_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_middle_name)],
+            CORRECT_PHONE_NUM: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_phone_num)],
+            CORRECT_P_SER: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_pas_ser)],
+            CORRECT_P_NUM: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_pas_num)],
+            CORRECT_P_ISS_B: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_pas_iss_by)],
+            CORRECT_P_ISS_D: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_pas_iss_date)],
+            CORRECT_REG_ADDR: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_reg_address)],
+            CORRECT_TAX_ID: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_tax_id)],
+
         },
         fallbacks=[CommandHandler("cancel", cancel)],
     )
+
+    conv_handler.states.setdefault(CHECK, []).append(MessageHandler(filters.Regex("^(Вірно|Невірно)$"), check))
 
     application.add_handler(conv_handler)
 

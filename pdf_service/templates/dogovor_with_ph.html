@@ -2,7 +2,37 @@
 <head>
     <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
     <meta name=Generator content="Microsoft Word 15 (filtered)">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+     /* Font Definitions */
+     @font-face
+      {{font-family:"Cambria Math";
+      panose-1:2 4 5 3 5 4 6 3 2 4;}}
+    @font-face
+      {{font-family:Georgia;
+      panose-1:2 4 5 2 5 4 5 2 3 3;}}
+     /* Style Definitions */
+     p.MsoNormal, li.MsoNormal, div.MsoNormal
+      {{margin:0in;
+      line-height:115%;
+      font-size:11.0pt;
+      font-family:"Arial",sans-serif;
+      color:black;}}
+    .MsoChpDefault
+      {{font-size:10.0pt;
+      font-family:"Arial",sans-serif;}}
+     /* Page Definitions */
+     @page WordSection1
+      {{size:595.3pt 841.9pt;
+      margin:.5in .5in .5in .5in;}}
+    div.WordSection1
+      {{page:WordSection1;}}
+     /* List Definitions */
+     ol
+      {{margin-bottom:0in;}}
+    ul
+      {{margin-bottom:0in;}}
+
+    </style>
 </head>
 
 <body bgcolor=white lang=EN-US link="#0563C1" vlink="#954F72" style='word-wrap:break-word'>
@@ -15,7 +45,7 @@
       </span>
         </b>
         <b>
-            <span lang="UK" style='font-size:10.0pt;font-family:"Times New Roman", serif; text-decoration: underline;'>{{cont_numb}}</span>
+            <span lang="UK" style='font-size:10.0pt;font-family:"Times New Roman", serif; text-decoration: underline;'>{cont_numb}</span>
         </b>
     </p>
 
@@ -30,7 +60,7 @@
         <b>
       <span lang="UK"
             style='font-size:9.0pt;font-family:"Times New Roman",serif; text-decoration: underline; float:right'>
-        «{{day_today[0]}}» {{day_today[1]}} {{day_today[2]}} р.
+        «{day_today[0]}» {day_today[1]} {day_today[2]} р.
       </span>
         </b>
     </p>
@@ -42,10 +72,25 @@
       ФОП Євгієнко Юлія Володимирівна, яка діє на підставі Витягу з Єдиного державного реєстру юридичних осіб,
       фізичних осіб-підприємців та громадських формувань від 8.11.2018, номер запису про проведення державної реєстрації
       ФОП 2 068 000 0000 039984, що іменується надалі «ВИКОНАВЕЦЬ», з однієї сторони, і громадянин (ка)
-        <b>{{lastname}} {{firstname}} {{middlename}}, </b>
+        <b>{lastname} {firstname} {middlename}, </b>
         надалі – «ЗАМОВНИК», з другої сторони, надалі «СТОРОНИ», уклали цей договір про наступне:
     </span>
     </p>
+
+<!--    <p class="MsoNormal" style='line-height:normal'>-->
+<!--        <b>-->
+<!--      <span lang="UK" style='font-size:9.0pt;font-family:"Times New Roman",serif; text-decoration: underline;'>-->
+<!--        {lastname} {firstname} {middlename},-->
+<!--      </span>-->
+<!--        </b>-->
+<!--    </p>-->
+
+<!--    <p class="MsoNormal" style='text-align:justify;line-height:normal'>-->
+<!--    <span lang="UK" style='font-size:9.0pt;font-family:"Times New Roman",serif'>-->
+<!--      надалі – «ЗАМОВНИК», з другої сторони, надалі «СТОРОНИ», уклали цей договір про наступне:-->
+<!--    </span>-->
+<!--    </p>-->
+
     <p class="MsoNormal"
        style='margin-top:12.0pt;margin-right:0in;margin-bottom:6.0pt;margin-left:.25in;text-indent:-.25in;line-height:normal;page-break-after:avoid'>
         <b>
@@ -931,12 +976,12 @@
                     <p class="MsoNormal"
                        style='margin-top:6.0pt;margin-right:0in;margin-bottom:0in;margin-left:6.1pt;margin-bottom:.0001pt;text-align:justify;line-height:normal'>
             <span lang="UK" style='font-size:8.0pt;font-family:"Times New Roman",serif;'>
-              Паспорт: серія {{passport_series}} № {{passport_number}}
+              Паспорт: серія {passport_series} № {passport_number}
             </span>
                     </p>
                     <p class="MsoNormal" style='margin-left:6.1pt;text-align:justify;line-height:normal'>
             <span lang="UK" style='font-size:8.0pt;font-family:"Times New Roman",serif;'>
-              Виданий {{passport_issued_by}} від «{{passport_issued_date[0]}}» {{passport_issued_date[1]}} {{passport_issued_date[2]}} року
+              Виданий {passport_issued_by} від «{passport_issued_date[0]}» {passport_issued_date[1]} {passport_issued_date[2]} року
             </span>
                     </p>
                     <p class="MsoNormal" style='margin-left:6.1pt;text-align:justify;line-height:normal'>
@@ -946,7 +991,7 @@
                     </p>
                     <p class="MsoNormal" style='margin-left:6.1pt;text-align:justify;line-height:normal'>
             <span lang="UK" style='font-size:8.0pt;font-family:"Times New Roman",serif;'>
-              Адреса реєстрації:{{registration_address}}
+              Адреса реєстрації:{registration_address}
             </span>
                     </p>
 <!--                    <p class="MsoNormal" style='margin-left:6.1pt;text-align:justify;line-height:normal'>-->
@@ -960,7 +1005,7 @@
             </span>
                         <span lang="UK"
                               style='font-size:8.0pt;font-family:"Times New Roman",serif; '>
-              ІПН {{id_code}}
+              ІПН {id_code}
             </span>
                     </p>
                     <p class="MsoNormal" style='margin-top:6.0pt;text-align:justify;line-height:normal'>
@@ -979,7 +1024,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt'>
-                      &nbsp;{{phone_number[0]}}
+                      &nbsp;{phone_number[0]}
                     </span>
                                     </p>
                                 </td>
@@ -987,7 +1032,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;{{phone_number[1]}}
+                      &nbsp;{phone_number[1]}
                     </span>
                                     </p>
                                 </td>
@@ -995,7 +1040,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;{{phone_number[2]}}
+                      &nbsp;{phone_number[2]}
                     </span>
                                     </p>
                                 </td>
@@ -1003,7 +1048,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      {{phone_number[3]}}
+                      {phone_number[3]}
                     </span>
                                     </p>
                                 </td>
@@ -1011,7 +1056,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;{{phone_number[4]}}
+                      &nbsp;{phone_number[4]}
                     </span>
                                     </p>
                                 </td>
@@ -1019,7 +1064,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;{{phone_number[5]}}
+                      &nbsp;{phone_number[5]}
                     </span>
                                     </p>
                                 </td>
@@ -1027,7 +1072,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;{{phone_number[6]}}
+                      &nbsp;{phone_number[6]}
                     </span>
                                     </p>
                                 </td>
@@ -1035,7 +1080,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;{{phone_number[7]}}
+                      &nbsp;{phone_number[7]}
                     </span>
                                     </p>
                                 </td>
@@ -1043,7 +1088,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt; border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;{{phone_number[8]}}
+                      &nbsp;{phone_number[8]}
                     </span>
                                     </p>
                                 </td>
@@ -1051,7 +1096,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt; border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;{{phone_number[9]}}
+                      &nbsp;{phone_number[9]}
                     </span>
                                     </p>
                                 </td>
@@ -1076,7 +1121,7 @@
             </tr>
         </table>
     
-	
+
     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
     <span lang="UK">
       &nbsp;

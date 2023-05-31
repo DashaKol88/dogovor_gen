@@ -45,7 +45,7 @@
       </span>
         </b>
         <b>
-            <span lang="UK" style='font-size:10.0pt;font-family:"Times New Roman", serif; text-decoration: underline;'>100</span>
+            <span lang="UK" style='font-size:10.0pt;font-family:"Times New Roman", serif; text-decoration: underline;'>{{cont_numb}}</span>
         </b>
     </p>
 
@@ -60,7 +60,7 @@
         <b>
       <span lang="UK"
             style='font-size:9.0pt;font-family:"Times New Roman",serif; text-decoration: underline; float:right'>
-        «20» травня 2023 р.
+        «{{day_today[0]}}» {{day_today[1]}} {{day_today[2]}} р.
       </span>
         </b>
     </p>
@@ -72,25 +72,10 @@
       ФОП Євгієнко Юлія Володимирівна, яка діє на підставі Витягу з Єдиного державного реєстру юридичних осіб,
       фізичних осіб-підприємців та громадських формувань від 8.11.2018, номер запису про проведення державної реєстрації
       ФОП 2 068 000 0000 039984, що іменується надалі «ВИКОНАВЕЦЬ», з однієї сторони, і громадянин (ка)
-        <b>Іванов Іван Іванович, </b>
+        <b>{{lastname}} {{firstname}} {{middlename}}, </b>
         надалі – «ЗАМОВНИК», з другої сторони, надалі «СТОРОНИ», уклали цей договір про наступне:
     </span>
     </p>
-
-<!--    <p class="MsoNormal" style='line-height:normal'>-->
-<!--        <b>-->
-<!--      <span lang="UK" style='font-size:9.0pt;font-family:"Times New Roman",serif; text-decoration: underline;'>-->
-<!--        Іванов Іван Іванович,-->
-<!--      </span>-->
-<!--        </b>-->
-<!--    </p>-->
-
-<!--    <p class="MsoNormal" style='text-align:justify;line-height:normal'>-->
-<!--    <span lang="UK" style='font-size:9.0pt;font-family:"Times New Roman",serif'>-->
-<!--      надалі – «ЗАМОВНИК», з другої сторони, надалі «СТОРОНИ», уклали цей договір про наступне:-->
-<!--    </span>-->
-<!--    </p>-->
-
     <p class="MsoNormal"
        style='margin-top:12.0pt;margin-right:0in;margin-bottom:6.0pt;margin-left:.25in;text-indent:-.25in;line-height:normal;page-break-after:avoid'>
         <b>
@@ -976,12 +961,12 @@
                     <p class="MsoNormal"
                        style='margin-top:6.0pt;margin-right:0in;margin-bottom:0in;margin-left:6.1pt;margin-bottom:.0001pt;text-align:justify;line-height:normal'>
             <span lang="UK" style='font-size:8.0pt;font-family:"Times New Roman",serif;'>
-              Паспорт: серія АВ № 123456
+              Паспорт: серія {{passport_series}} № {{passport_number}}
             </span>
                     </p>
                     <p class="MsoNormal" style='margin-left:6.1pt;text-align:justify;line-height:normal'>
             <span lang="UK" style='font-size:8.0pt;font-family:"Times New Roman",serif;'>
-              Виданий Бориспільським МВ ГУ МВС України в Київській області від «1» січня 2022 року
+              Виданий {{passport_issued_by}} від «{{passport_issued_date[0]}}» {{passport_issued_date[1]}} {{passport_issued_date[2]}} року
             </span>
                     </p>
                     <p class="MsoNormal" style='margin-left:6.1pt;text-align:justify;line-height:normal'>
@@ -991,7 +976,7 @@
                     </p>
                     <p class="MsoNormal" style='margin-left:6.1pt;text-align:justify;line-height:normal'>
             <span lang="UK" style='font-size:8.0pt;font-family:"Times New Roman",serif;'>
-              Адреса реєстрації:м. Київ, вул. Січових стрільців, буд. 40, кв. 152
+              Адреса реєстрації:{{registration_address}}
             </span>
                     </p>
 <!--                    <p class="MsoNormal" style='margin-left:6.1pt;text-align:justify;line-height:normal'>-->
@@ -1005,7 +990,7 @@
             </span>
                         <span lang="UK"
                               style='font-size:8.0pt;font-family:"Times New Roman",serif; '>
-              ІПН 1234567890
+              ІПН {{id_code}}
             </span>
                     </p>
                     <p class="MsoNormal" style='margin-top:6.0pt;text-align:justify;line-height:normal'>
@@ -1024,7 +1009,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt'>
-                      &nbsp;1
+                      &nbsp;{{phone_number[0]}}
                     </span>
                                     </p>
                                 </td>
@@ -1032,7 +1017,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;2
+                      &nbsp;{{phone_number[1]}}
                     </span>
                                     </p>
                                 </td>
@@ -1040,7 +1025,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;3
+                      &nbsp;{{phone_number[2]}}
                     </span>
                                     </p>
                                 </td>
@@ -1048,7 +1033,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      4
+                      {{phone_number[3]}}
                     </span>
                                     </p>
                                 </td>
@@ -1056,7 +1041,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;5
+                      &nbsp;{{phone_number[4]}}
                     </span>
                                     </p>
                                 </td>
@@ -1064,7 +1049,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;6
+                      &nbsp;{{phone_number[5]}}
                     </span>
                                     </p>
                                 </td>
@@ -1072,7 +1057,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;7
+                      &nbsp;{{phone_number[6]}}
                     </span>
                                     </p>
                                 </td>
@@ -1080,7 +1065,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt;border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;8
+                      &nbsp;{{phone_number[7]}}
                     </span>
                                     </p>
                                 </td>
@@ -1088,7 +1073,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt; border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;9
+                      &nbsp;{{phone_number[8]}}
                     </span>
                                     </p>
                                 </td>
@@ -1096,7 +1081,7 @@
                                     style='width:22.9pt;border:solid black 1.0pt; border-left:none;padding:0in 5.4pt 0in 5.4pt'>
                                     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
                     <span lang="UK" style='font-size:8.0pt;'>
-                      &nbsp;0
+                      &nbsp;{{phone_number[9]}}
                     </span>
                                     </p>
                                 </td>
@@ -1120,8 +1105,8 @@
                 </td>
             </tr>
         </table>
-    </div>
-
+    
+	
     <p class="MsoNormal" align=center style='text-align:center;line-height:normal'>
     <span lang="UK">
       &nbsp;
@@ -1379,7 +1364,7 @@
             </td>
         </tr>
     </table>
-
+	</div>
     <p class="MsoNormal" style='line-height:normal'>
     <span lang="UK">&nbsp;
     </span>
