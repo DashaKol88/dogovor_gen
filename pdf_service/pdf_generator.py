@@ -10,11 +10,8 @@ from userdata import Customer
 # hack for windows
 load_dotenv()
 
-wkhtmltopdf_path = os.getenv("WKHTMLTOPDF_PATH")
 html_template_path_default = os.getenv("HTML_TEMPLATE_PATH_1")
 default_output_path = os.getenv("OUTPUT_PATH")
-
-config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
 
 
 def parsing_data(value: date) -> List[str]:
