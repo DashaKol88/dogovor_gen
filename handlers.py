@@ -1,18 +1,13 @@
 import logging
-from typing import Any, Coroutine
 
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update, KeyboardButton, InputFile, Bot
+from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update, InputFile, Bot
 from telegram.ext import (
-    Application,
-    CommandHandler,
     ContextTypes,
     ConversationHandler,
-    MessageHandler,
-    filters, CallbackContext,
+    CallbackContext,
 )
 
 from pdf_service.pdf_generator import generate_pdf_with_jinja
-from pdf_service.templates.generate_with_format import generate_pdf_with_format
 from userdata import *
 
 logging.basicConfig(

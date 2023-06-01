@@ -82,12 +82,4 @@ def generate_pdf_with_jinja(customer: Customer, contract_number: int = 100,
     return output_path
 
 
-# generate_html_doc(customer, html_template_path, output_path)
 
-
-# def generate_pdf(template_path="output/output.html", output_path="output/out.pdf"):
-#     pdfkit.from_file(template_path, output_path, configuration=config)
-#
-#
-# if __name__ == "__main__":
-#     generate_pdf("output/completed_contract.html")
