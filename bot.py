@@ -16,6 +16,8 @@ if __version_info__ < (20, 0, 0, "alpha", 5):
         f"visit https://docs.python-telegram-bot.org/en/v{TG_VER}/examples.html"
     )
 
+CORRECTION_REGEX = "^(Ім'я|Прізвище|По батькові|Номер телефону|Серія паспорта|Номер паспорта|Ким виданий паспорт|Дата видачі паспорта|Адреса реєстрації|Ідентифікаційний код)$"
+
 
 def main() -> None:
     """
@@ -40,17 +42,13 @@ def main() -> None:
             P_ISS_D: [MessageHandler(filters.TEXT & ~filters.COMMAND, pas_iss_date)],
             REG_ADDR: [MessageHandler(filters.TEXT & ~filters.COMMAND, reg_address)],
             TAX_ID: [MessageHandler(filters.TEXT & ~filters.COMMAND, tax_id)],
-            CORRECTION: [MessageHandler(filters.Regex(
-                "^(Ім'я|Прізвище|По батькові|Номер телефону|Серія паспорта|Номер паспорта|Ким виданий паспорт|Дата видачі паспорта|Адреса реєстрації|Ідентифікаційний код)$"),
-                correction_menu)],
+            CORRECTION: [MessageHandler(filters.Regex(CORRECTION_REGEX), correction_menu)],
             CORRECT_HANDLER: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_handler)],
             CHECK: [MessageHandler(filters.Regex("^(Вірно|Невірно)$"), check)],
 
         },
         fallbacks=[CommandHandler("cancel", cancel)],
     )
-
-    # conv_handler.states.setdefault(CHECK, []).append(MessageHandler(filters.Regex("^(Вірно|Невірно)$"), check))
 
     application.add_handler(conv_handler)
 
