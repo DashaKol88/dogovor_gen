@@ -2,9 +2,12 @@ import logging
 
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update, InputFile, Bot
 from telegram.ext import (
+    Application,
+    CommandHandler,
     ContextTypes,
     ConversationHandler,
-    CallbackContext,
+    MessageHandler,
+    filters, CallbackContext
 )
 
 from pdf_service.pdf_generator import generate_pdf_with_jinja
@@ -17,23 +20,6 @@ logger = logging.getLogger(__name__)
 
 LAST_NAME, FIRST_NAME, MIDDLE_NAME, PHONE_NUM, P_SER, P_NUM, P_ISS_B, P_ISS_D, REG_ADDR, TAX_ID, CHECK, THANK, CORRECTION, CORRECT_HANDLER = range(
     14)
-
-
-async def send_pdf_document(bot: Bot, chat_id: int, document_path: str, caption: str = "") -> None:
-    """
-    Sends a PDF document to the specified chat using the Telegram bot.
-
-    Parameters:
-    - bot: A Bot instance representing the Telegram bot.
-    - chat_id: An integer representing the ID of the chat to send the document to.
-    - document_path: A string specifying the path to the PDF document file.
-    - caption: (optional) A string representing the caption for the document.
-
-    Returns:
-    - None
-    """
-    with open(document_path, 'rb') as file:
-        await bot.send_document(chat_id=chat_id, document=InputFile(file), caption=caption)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -315,24 +301,17 @@ async def tax_id(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 
 async def check(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """
-    Handles the user's verification of entered data.
 
-    Parameters:
-    - update: An Update object containing information about the incoming message or event.
-    - context: A Context object providing access to the shared state and bot's functions.
-
-    Returns:
-    - int: The state code for transitioning to the next dialog step or ending the conversation.
-    """
     user_choice = update.message.text.lower()
 
     if user_choice == "вірно":
         user = update.message.from_user
         customer = context.user_data['customer']
         output_path = generate_pdf_with_jinja(customer, user.id)
-        await send_pdf_document(context.bot, update.message.chat_id, output_path, caption="Ваш договір")
-        # output_path = generate_pdf_with_format(customer, user.id)
+        with open(output_path, 'rb') as file:
+            await context.bot.send_document(chat_id=update.message.chat_id, document=InputFile(file),
+                                            caption="Ваш договір")
+
         await update.message.reply_text("Дякую.")
 
         return ConversationHandler.END

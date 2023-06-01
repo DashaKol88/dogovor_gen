@@ -11,8 +11,8 @@ from userdata import Customer
 load_dotenv()
 
 wkhtmltopdf_path = os.getenv("WKHTMLTOPDF_PATH")
-html_template_path = os.getenv("HTML_TEMPLATE_PATH_1")
-output_path = os.getenv("OUTPUT_PATH_1")
+html_template_path_default = os.getenv("HTML_TEMPLATE_PATH_1")
+default_output_path = os.getenv("OUTPUT_PATH")
 
 config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
 
@@ -46,8 +46,8 @@ def parsing_data(value: date) -> List[str]:
 
 
 def generate_pdf_with_jinja(customer: Customer, contract_number: int = 100,
-                            html_template_path: str = html_template_path,
-                            output_path: str = output_path) -> str:
+                            html_template_path: str = html_template_path_default,
+                            output_path: str = default_output_path) -> str:
     """
     Generates a PDF document using the provided customer data and template.
 
@@ -62,6 +62,8 @@ def generate_pdf_with_jinja(customer: Customer, contract_number: int = 100,
     """
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template(html_template_path)
+
+    output_path = output_path + str(int(contract_number)) + ".pdf"
 
     filled_template = template.render(
         cont_numb=str(contract_number),
@@ -78,8 +80,10 @@ def generate_pdf_with_jinja(customer: Customer, contract_number: int = 100,
         id_code=customer.get_id_code()
     )
 
-    pdfkit.from_string(filled_template, output_path, configuration=config)
+    try:
+        pdfkit.from_string(filled_template, output_path)
+    except OSError:
+        wkhtmltopdf_path = os.getenv("WKHTMLTOPDF_PATH")
+        config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+        pdfkit.from_string(filled_template, output_path, configuration=config)
     return output_path
-
-
-
