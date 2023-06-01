@@ -20,8 +20,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-LAST_NAME, FIRST_NAME, MIDDLE_NAME, PHONE_NUM, P_SER, P_NUM, P_ISS_B, P_ISS_D, REG_ADDR, TAX_ID, CHECK, THANK, CORRECTION, CORRECT_FIRST_NAME, CORRECT_LAST_NAME, CORRECT_MIDDLE_NAME, CORRECT_PHONE_NUM, CORRECT_P_SER, CORRECT_P_NUM, CORRECT_P_ISS_B, CORRECT_P_ISS_D, CORRECT_REG_ADDR, CORRECT_TAX_ID = range(
-    23)
+LAST_NAME, FIRST_NAME, MIDDLE_NAME, PHONE_NUM, P_SER, P_NUM, P_ISS_B, P_ISS_D, REG_ADDR, TAX_ID, CHECK, THANK, CORRECTION, CORRECT_HANDLER = range(
+    14)
 
 
 async def send_pdf_document(bot: Bot, chat_id: int, document_path: str, caption: str = "") -> None:
@@ -88,8 +88,7 @@ async def lastname(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return LAST_NAME
 
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Тепер введіть, будь ласка, Ваше ім'я:")
+    await update.message.reply_text("Дякую.\nТепер введіть, будь ласка, Ваше ім'я:")
     return FIRST_NAME
 
 
@@ -114,8 +113,7 @@ async def firstname(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return FIRST_NAME
 
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Тепер введіть, будь ласка, Ваше по батькові:")
+    await update.message.reply_text("Дякую.\nТепер введіть, будь ласка, Ваше по батькові:")
 
     return MIDDLE_NAME
 
@@ -141,8 +139,7 @@ async def middle_name(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return MIDDLE_NAME
 
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Тепер введіть, будь ласка, свій номер телефону (10 цифр):")
+    await update.message.reply_text("Дякую.\nТепер введіть, будь ласка, свій номер телефону (10 цифр):")
 
     return PHONE_NUM
 
@@ -167,8 +164,7 @@ async def phonenum(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return PHONE_NUM
 
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Тепер введіть, будь ласка, серію паспорту:")
+    await update.message.reply_text("Дякую.\nТепер введіть, будь ласка, серію паспорту:")
     return P_SER
 
 
@@ -192,8 +188,7 @@ async def pas_ser(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return P_SER
 
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Тепер введіть, будь ласка, номер паспорту:")
+    await update.message.reply_text("Дякую.\nТепер введіть, будь ласка, номер паспорту:")
     return P_NUM
 
 
@@ -217,8 +212,7 @@ async def pas_num(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return P_NUM
 
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Тепер введіть, будь ласка, ким виданий паспорт:")
+    await update.message.reply_text("Дякую.\nТепер введіть, будь ласка, ким виданий паспорт:")
     return P_ISS_B
 
 
@@ -242,10 +236,8 @@ async def pas_iss_by(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return P_ISS_B
 
-    # context.user_data['customer'].set_passport_issued_by(update.message.text)
-    await update.message.reply_text("Дякую.")
     await update.message.reply_text(
-        f"Тепер введіть, будь ласка, дату видачі паспорту у форматі день.місяць.рік (наприклад, {date.today().strftime('%d.%m.%Y')}):")
+        f"Дякую.\nТепер введіть, будь ласка, дату видачі паспорту у форматі день.місяць.рік (наприклад, {date.today().strftime('%d.%m.%Y')}):")
     return P_ISS_D
 
 
@@ -269,8 +261,7 @@ async def pas_iss_date(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return P_ISS_D
 
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Тепер введіть, будь ласка, адресу реестрації:")
+    await update.message.reply_text("Дякую.\nТепер введіть, будь ласка, адресу реестрації:")
     return REG_ADDR
 
 
@@ -294,9 +285,7 @@ async def reg_address(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return REG_ADDR
 
-    # context.user_data['customer'].set_registration_address(update.message.text)
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Тепер введіть, будь ласка, ідентифікаційний код:")
+    await update.message.reply_text("Дякую.\nТепер введіть, будь ласка, ідентифікаційний код:")
     return TAX_ID
 
 
@@ -320,8 +309,7 @@ async def tax_id(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return TAX_ID
 
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Наразі мені відомі такі данні про вас:")
+    await update.message.reply_text("Дякую.\nНаразі мені відомі такі данні про вас:")
     await update.message.reply_text(context.user_data['customer'].print_info(), parse_mode='html')
     reply_keyboard = [["Вірно", "Невірно"]]
     await update.message.reply_text("Тепер перевірте, будь ласка, чи всі дані введено вірно",
@@ -349,15 +337,15 @@ async def check(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         customer = context.user_data['customer']
         output_path = generate_pdf_with_jinja(customer, user.id)
         await send_pdf_document(context.bot, update.message.chat_id, output_path, caption="Ваш договір")
-        output_path = generate_pdf_with_format(customer, user.id)
+        # output_path = generate_pdf_with_format(customer, user.id)
         await update.message.reply_text("Дякую.")
 
         return ConversationHandler.END
     elif user_choice == "невірно":
         reply_keyboard = [
-            ["Ім'я", "Прізвище", "По батькові", "Номер телефону", "Серія паспорта", "Номер паспорта",
-             "Ким виданий паспорт",
-             "Дата видачі паспорта", "Адреса реєстрації", "Ідентифікаційний код"]]
+            ["Ім'я", "Прізвище"], ["По батькові", "Номер телефону"], ["Серія паспорта", "Номер паспорта"],
+            ["Ким виданий паспорт",
+             "Дата видачі паспорта"], ["Адреса реєстрації", "Ідентифікаційний код"]]
 
         await update.message.reply_text(
             "Вкажіть, будь ласка, які дані невірні",
@@ -370,25 +358,15 @@ async def check(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         return CHECK
 
 
-async def correct_first_name(update: Update, context: CallbackContext) -> int:
-    """
-    Handles the correction of the user's first name.
-
-    Parameters:
-    - update: An Update object containing information about the incoming message or event.
-    - context: A CallbackContext object providing access to the shared state and bot's functions.
-
-    Returns:
-    - int: The state code for transitioning to the next dialog step.
-    """
-    new_first_name = update.message.text
+async def correct_handler(update: Update, context: CallbackContext) -> int:
     try:
-        context.user_data['customer'].set_firstname(new_first_name)
+        method_to_call = getattr(context.user_data['customer'], context.user_data['correction_method'])
+        method_to_call(update.message.text)
     except ValueError as err:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
-        return CORRECT_FIRST_NAME
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Наразі мені відомі такі данні про вас:")
+        return CORRECT_HANDLER
+
+    await update.message.reply_text("Дякую.\nНаразі мені відомі такі данні про вас:")
     await update.message.reply_text(context.user_data['customer'].print_info(), parse_mode='html')
     reply_keyboard = [["Вірно", "Невірно"]]
     await update.message.reply_text("Тепер перевірте, будь ласка, чи всі дані введено вірно",
@@ -397,313 +375,27 @@ async def correct_first_name(update: Update, context: CallbackContext) -> int:
     return CHECK
 
 
-async def correct_last_name(update: Update, context: CallbackContext) -> int:
-    """
-    Handles the correction of the user's last name.
+async def correction_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    correction_messages = {
+        "Ім'я": ["set_firstname", "Тепер введіть, будь ласка, Ваше ім'я:"],
+        "Прізвище": ["set_lastname", "Тепер введіть, будь ласка, Ваше прізвище:"],
+        "По батькові": ["set_middle_name", "Тепер введіть, будь ласка, Ваше по батькові:"],
+        "Номер телефону": ["set_phone_number", "Тепер введіть, будь ласка, Ваш номер телефону:"],
+        "Серія паспорта": ["set_passport_series", "Тепер введіть, будь ласка, серію паспорта:"],
+        "Номер паспорта": ["set_passport_number", "Тепер введіть, будь ласка, номер паспорта:"],
+        "Ким виданий паспорт": ["set_passport_issued_by", "Тепер введіть, будь ласка, ким виданий паспорт:"],
+        "Дата видачі паспорта": ["set_passport_issued_date", "Тепер введіть, будь ласка, дату видачі паспорта:"],
+        "Адреса реєстрації": ["set_registration_address", "Тепер введіть, будь ласка, адресу реєстрації:"],
+        "Ідентифікаційний код": ["set_id_code", "Тепер введіть, будь ласка, ідентифікаційний код:"]
+    }
 
-    Parameters:
-    - update: An Update object containing information about the incoming message or event.
-    - context: A CallbackContext object providing access to the shared state and bot's functions.
-
-    Returns:
-    - int: The state code for transitioning to the next dialog step.
-    """
-    new_last_name = update.message.text
-    try:
-        context.user_data['customer'].set_last_name(new_last_name)
-    except ValueError as err:
-        await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
-        return CORRECT_LAST_NAME
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Наразі мені відомі такі данні про вас:")
-    await update.message.reply_text(context.user_data['customer'].print_info(), parse_mode='html')
-    reply_keyboard = [["Вірно", "Невірно"]]
-    await update.message.reply_text("Тепер перевірте, будь ласка, чи всі дані введено вірно",
-                                    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True,
-                                                                     input_field_placeholder="Вірно чи невірно?"), )
-    return CHECK
-
-
-async def correct_middle_name(update: Update, context: CallbackContext) -> int:
-    """
-    Handles the correction of the user's middle name.
-
-    Parameters:
-    - update: An Update object containing information about the incoming message or event.
-    - context: A CallbackContext object providing access to the shared state and bot's functions.
-
-    Returns:
-    - int: The state code for transitioning to the next dialog step.
-    """
-    new_middle_name = update.message.text
-    try:
-        context.user_data['customer'].set_middle_name(new_middle_name)
-    except ValueError as err:
-        await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
-        return CORRECT_MIDDLE_NAME
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Наразі мені відомі такі данні про вас:")
-    await update.message.reply_text(context.user_data['customer'].print_info(), parse_mode='html')
-    reply_keyboard = [["Вірно", "Невірно"]]
-    await update.message.reply_text("Тепер перевірте, будь ласка, чи всі дані введено вірно",
-                                    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True,
-                                                                     input_field_placeholder="Вірно чи невірно?"), )
-    return CHECK
-
-
-async def correct_phone_num(update: Update, context: CallbackContext) -> int:
-    """
-    Handles the correction of the user's phone number.
-
-    Parameters:
-    - update: An Update object containing information about the incoming message or event.
-    - context: A CallbackContext object providing access to the shared state and bot's functions.
-
-    Returns:
-    - int: The state code for transitioning to the next dialog step.
-    """
-    new_phone_number = update.message.text
-    try:
-        context.user_data['customer'].set_phone_number(new_phone_number)
-    except ValueError as err:
-        await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
-        return CORRECT_PHONE_NUM
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Наразі мені відомі такі данні про вас:")
-    await update.message.reply_text(context.user_data['customer'].print_info(), parse_mode='html')
-    reply_keyboard = [["Вірно", "Невірно"]]
-    await update.message.reply_text("Тепер перевірте, будь ласка, чи всі дані введено вірно",
-                                    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True,
-                                                                     input_field_placeholder="Вірно чи невірно?"), )
-    return CHECK
-
-
-async def correct_pas_ser(update: Update, context: CallbackContext) -> int:
-    """
-    Handles the correction of the user's passport series.
-
-    Parameters:
-    - update: An Update object containing information about the incoming message or event.
-    - context: A CallbackContext object providing access to the shared state and bot's functions.
-
-    Returns:
-    - int: The state code for transitioning to the next dialog step.
-    """
-    new_passport_series = update.message.text
-    try:
-        context.user_data['customer'].set_passport_series(new_passport_series)
-    except ValueError as err:
-        await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
-        return CORRECT_P_SER
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Наразі мені відомі такі данні про вас:")
-    await update.message.reply_text(context.user_data['customer'].print_info(), parse_mode='html')
-    reply_keyboard = [["Вірно", "Невірно"]]
-    await update.message.reply_text("Тепер перевірте, будь ласка, чи всі дані введено вірно",
-                                    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True,
-                                                                     input_field_placeholder="Вірно чи невірно?"), )
-    return CHECK
-
-
-async def correct_pas_num(update: Update, context: CallbackContext) -> int:
-    """
-    Handles the correction of the user's passport number.
-
-    Parameters:
-    - update: An Update object containing information about the incoming message or event.
-    - context: A CallbackContext object providing access to the shared state and bot's functions.
-
-    Returns:
-    - int: The state code for transitioning to the next dialog step.
-    """
-    new_passport_number = update.message.text
-    try:
-        context.user_data['customer'].set_passport_number(new_passport_number)
-    except ValueError as err:
-        await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
-        return CORRECT_P_NUM
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Наразі мені відомі такі данні про вас:")
-    await update.message.reply_text(context.user_data['customer'].print_info(), parse_mode='html')
-    reply_keyboard = [["Вірно", "Невірно"]]
-    await update.message.reply_text("Тепер перевірте, будь ласка, чи всі дані введено вірно",
-                                    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True,
-                                                                     input_field_placeholder="Вірно чи невірно?"), )
-    return CHECK
-
-
-async def correct_pas_iss_by(update: Update, context: CallbackContext) -> int:
-    """
-    Handles the correction of the user's passport issued by.
-
-    Parameters:
-    - update: An Update object containing information about the incoming message or event.
-    - context: A CallbackContext object providing access to the shared state and bot's functions.
-
-    Returns:
-    - int: The state code for transitioning to the next dialog step.
-    """
-    new_pas_iss_by = update.message.text
-    try:
-        context.user_data['customer'].set_passport_issued_by(new_pas_iss_by)
-    except ValueError as err:
-        await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
-        return CORRECT_P_ISS_B
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Наразі мені відомі такі данні про вас:")
-    await update.message.reply_text(context.user_data['customer'].print_info(), parse_mode='html')
-    reply_keyboard = [["Вірно", "Невірно"]]
-    await update.message.reply_text("Тепер перевірте, будь ласка, чи всі дані введено вірно",
-                                    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True,
-                                                                     input_field_placeholder="Вірно чи невірно?"), )
-    return CHECK
-
-
-async def correct_pas_iss_date(update: Update, context: CallbackContext) -> int:
-    """
-    Handles the correction of the user's passport issued date.
-
-    Parameters:
-    - update: An Update object containing information about the incoming message or event.
-    - context: A CallbackContext object providing access to the shared state and bot's functions.
-
-    Returns:
-    - int: The state code for transitioning to the next dialog step.
-    """
-    new_pas_iss_date = update.message.text
-    try:
-        context.user_data['customer'].set_passport_issued_date(new_pas_iss_date)
-    except ValueError as err:
-        await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
-        return CORRECT_P_ISS_D
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Наразі мені відомі такі данні про вас:")
-    await update.message.reply_text(context.user_data['customer'].print_info(), parse_mode='html')
-    reply_keyboard = [["Вірно", "Невірно"]]
-    await update.message.reply_text("Тепер перевірте, будь ласка, чи всі дані введено вірно",
-                                    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True,
-                                                                     input_field_placeholder="Вірно чи невірно?"), )
-    return CHECK
-
-
-async def correct_reg_address(update: Update, context: CallbackContext) -> int:
-    """
-    Handles the correction of the user's registration address.
-
-    Parameters:
-    - update: An Update object containing information about the incoming message or event.
-    - context: A CallbackContext object providing access to the shared state and bot's functions.
-
-    Returns:
-    - int: The state code for transitioning to the next dialog step.
-    """
-    new_reg_address = update.message.text
-    try:
-        context.user_data['customer'].set_registration_address(new_reg_address)
-    except ValueError as err:
-        await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
-        return CORRECT_REG_ADDR
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Наразі мені відомі такі данні про вас:")
-    await update.message.reply_text(context.user_data['customer'].print_info(), parse_mode='html')
-    reply_keyboard = [["Вірно", "Невірно"]]
-    await update.message.reply_text("Тепер перевірте, будь ласка, чи всі дані введено вірно",
-                                    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True,
-                                                                     input_field_placeholder="Вірно чи невірно?"), )
-    return CHECK
-
-
-async def correct_tax_id(update: Update, context: CallbackContext) -> int:
-    """
-    Handles the correction of the user's tax ID.
-
-    Parameters:
-    - update: An Update object containing information about the incoming message or event.
-    - context: A CallbackContext object providing access to the shared state and bot's functions.
-
-    Returns:
-    - int: The state code for transitioning to the next dialog step.
-    """
-    new_tax_id = update.message.text
-    try:
-        context.user_data['customer'].set_id_code(new_tax_id)
-    except ValueError as err:
-        await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
-        return CORRECT_TAX_ID
-    await update.message.reply_text("Дякую.")
-    await update.message.reply_text("Наразі мені відомі такі данні про вас:")
-    await update.message.reply_text(context.user_data['customer'].print_info(), parse_mode='html')
-    reply_keyboard = [["Вірно", "Невірно"]]
-    await update.message.reply_text("Тепер перевірте, будь ласка, чи всі дані введено вірно",
-                                    reply_markup=ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True,
-                                                                     input_field_placeholder="Вірно чи невірно?"), )
-    return CHECK
-
-
-async def handle_correction(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """
-    Handles the correction of user data based on the incorrect data provided.
-
-    Parameters:
-    - update: An Update object containing information about the incoming message or event.
-    - context: A ContextTypes.DEFAULT_TYPE object providing access to the shared state and bot's functions.
-
-    Returns:
-    - int: The state code for transitioning to the next dialog step.
-    """
     incorrect_data = update.message.text
 
-    if incorrect_data == "Ім'я":
-        await update.message.reply_text("Тепер введіть, будь ласка, Ваше ім'я:")
-        return CORRECT_FIRST_NAME
-    elif incorrect_data == "Прізвище":
-        await update.message.reply_text("Тепер введіть, будь ласка, Ваше прізвище:")
-        return CORRECT_LAST_NAME
-    elif incorrect_data == "По батькові":
-        await update.message.reply_text("Тепер введіть, будь ласка, Ваше по батькові:")
-        return CORRECT_MIDDLE_NAME
-    elif incorrect_data == "Номер телефону":
-        await update.message.reply_text("Тепер введіть, будь ласка, Ваш номер телефону:")
-        return CORRECT_PHONE_NUM
-    elif incorrect_data == "Серія паспорта":
-        await update.message.reply_text("Тепер введіть, будь ласка, серію паспорта:")
-        return CORRECT_P_SER
-    elif incorrect_data == "Номер паспорта":
-        await update.message.reply_text("Тепер введіть, будь ласка, номер паспорта:")
-        return CORRECT_P_NUM
-    elif incorrect_data == "Ким виданий паспорт":
-        await update.message.reply_text("Тепер введіть, будь ласка, ким виданий паспорт:")
-        return CORRECT_P_ISS_B
-    elif incorrect_data == "Дата видачі паспорта":
-        await update.message.reply_text("Тепер введіть, будь ласка, дату видачі паспорта:")
-        return CORRECT_P_ISS_D
-    elif incorrect_data == "Адреса реєстрації":
-        await update.message.reply_text("Тепер введіть, будь ласка, адресу реєстрації:")
-        return CORRECT_REG_ADDR
-    elif incorrect_data == "Ідентифікаційний код":
-        await update.message.reply_text("Тепер введіть, будь ласка, ідентифікаційний код:")
-        return CORRECT_TAX_ID
+    set_method, message = correction_messages.get(incorrect_data)
+    context.user_data['correction_method'] = set_method
+    await update.message.reply_text(message)
 
-
-# async def thanks(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-#     """
-#     Handles the completion of the conversation flow and sends the generated PDF document to the user.
-#
-#     Parameters:
-#     - update: An Update object containing information about the incoming message or event.
-#     - context: A Context object providing access to the shared state and bot's functions.
-#
-#     Returns:
-#     - int: The state code for ending the conversation handler.
-#     """
-#     user = update.message.from_user
-#     customer = context.user_data['customer']
-#     output_path = generate_pdf_with_jinja(customer, user.id)
-#     await send_pdf_document(context.bot, update.message.chat_id, output_path, caption="Ваш договір")
-#     output_path = generate_pdf_with_format(customer, user.id)
-#     await update.message.reply_text("Дякую.")
-#
-#     return ConversationHandler.END
+    return CORRECT_HANDLER
 
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:

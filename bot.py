@@ -42,23 +42,15 @@ def main() -> None:
             TAX_ID: [MessageHandler(filters.TEXT & ~filters.COMMAND, tax_id)],
             CORRECTION: [MessageHandler(filters.Regex(
                 "^(Ім'я|Прізвище|По батькові|Номер телефону|Серія паспорта|Номер паспорта|Ким виданий паспорт|Дата видачі паспорта|Адреса реєстрації|Ідентифікаційний код)$"),
-                handle_correction)],
-            CORRECT_LAST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_last_name)],
-            CORRECT_FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_first_name)],
-            CORRECT_MIDDLE_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_middle_name)],
-            CORRECT_PHONE_NUM: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_phone_num)],
-            CORRECT_P_SER: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_pas_ser)],
-            CORRECT_P_NUM: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_pas_num)],
-            CORRECT_P_ISS_B: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_pas_iss_by)],
-            CORRECT_P_ISS_D: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_pas_iss_date)],
-            CORRECT_REG_ADDR: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_reg_address)],
-            CORRECT_TAX_ID: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_tax_id)],
+                correction_menu)],
+            CORRECT_HANDLER: [MessageHandler(filters.TEXT & ~filters.COMMAND, correct_handler)],
+            CHECK: [MessageHandler(filters.Regex("^(Вірно|Невірно)$"), check)],
 
         },
         fallbacks=[CommandHandler("cancel", cancel)],
     )
 
-    conv_handler.states.setdefault(CHECK, []).append(MessageHandler(filters.Regex("^(Вірно|Невірно)$"), check))
+    # conv_handler.states.setdefault(CHECK, []).append(MessageHandler(filters.Regex("^(Вірно|Невірно)$"), check))
 
     application.add_handler(conv_handler)
 
