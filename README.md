@@ -1,6 +1,13 @@
 # PDF Agreement Telegram Bot
 
-Telegram bot to generate an agreement in PDF format
+Telegram bot to generate an agreement in PDF format\
+Using: 
+pdfkit, 
+wkhtmltopdf, 
+Jinja template engine
+
+### Example of generated pdf agreement
+[pdf_service/output/example.pdf](pdf_service/output/example.pdf)
 
 ## Installation
 
