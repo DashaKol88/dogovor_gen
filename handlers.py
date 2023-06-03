@@ -13,7 +13,7 @@ from telegram.ext import (
 from pdf_service.pdf_generator import generate_pdf_with_jinja
 from userdata import *
 
-# TODO: deal with logging
+
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
@@ -41,9 +41,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     context.user_data['customer'] = customer
     context.user_data['customer'].set_username(user.first_name)
 
-    # TODO: create new greeting message
     await update.message.reply_text(
-        "Привіт, я БОТ для генераціі PDF договору!\n"
+        "Вітаю, я БОТ для генераціі договору про надання послуг у форматі PDF!\n"
+        "1. Заповніть усі необхідні дані\n"
+        "2. Перевірте чи все заповнено вірно\n"
+        "3. Отримайте договір у форматі PDF\n"
         "Відправте /cancel для того щоб зупинити мене.\n\n")
 
     await update.message.reply_text("Введіть, будь ласка, Ваше прізвище:")
@@ -304,6 +306,17 @@ async def tax_id(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 
 async def check(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """
+    Handles the user's choice after verifying the customer information.
+
+    Parameters:
+    - update: An Update object containing information about the incoming message or event.
+    - context: A Context object providing access to the shared state and bot's functions.
+
+    Returns:
+    - int: The state code for transitioning to the next dialog step.
+    - Document: The generated PDF document if the user's choice is "Вірно".
+    """
     user_choice = update.message.text.lower()
 
     if user_choice == "вірно":
@@ -335,9 +348,17 @@ async def check(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 
 async def correct_handler(update: Update, context: CallbackContext) -> int:
+    """
+    Handles the correction of the user's input based on the chosen correction menu option.
 
+    Parameters:
+    - update: An Update object containing information about the incoming message or event.
+    - context: A CallbackContext object providing access to the shared state and bot's functions.
+
+    Returns:
+    - int: The state code for transitioning to the next dialog step.
+    """
     try:
-        # TODO: deal with getattr
         method_to_call = getattr(context.user_data['customer'], context.user_data['correction_method'])
         method_to_call(update.message.text)
     except ValueError as err:
@@ -354,6 +375,16 @@ async def correct_handler(update: Update, context: CallbackContext) -> int:
 
 
 async def correction_menu(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """
+    Handles the user choice of correction menu
+
+    Parameters:
+    - update: An Update object containing information about the incoming message or event.
+    - context: A Context object providing access to the shared state and bot's functions.
+
+    Returns:
+    - int: The state code for transitioning to the next dialog step.
+    """
     corrections = {
         "Ім'я": ["set_firstname", "Введіть, будь ласка, Ваше ім'я:"],
         "Прізвище": ["set_lastname", "Введіть, будь ласка, Ваше прізвище:"],
