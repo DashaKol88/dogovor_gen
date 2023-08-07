@@ -38,7 +38,10 @@ def parsing_data(value: date) -> List[str]:
         "11": "листопада",
         "12": "грудня"
     }
-    value = [str(value.day), months[str(value.month)], str(value.year)]
+    if value == "":
+        value = ["", "", ""]
+    else:
+        value = [str(value.day), months[str(value.month)], str(value.year)]
     return value
 
 

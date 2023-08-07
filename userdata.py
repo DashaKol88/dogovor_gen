@@ -42,16 +42,11 @@ class Customer:
 
         :param lastname: The last name.
         :type lastname: str
-        :raises ValueError: If the last name has an invalid length or contains invalid characters.
         """
-        if len(lastname) < 2 or len(lastname) > 40:
-            raise ValueError('Прізвище має містити від 2 до 40 символів')
-
-        ukrainian_pattern = re.compile(r"^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ'-]+?$")
-        if not ukrainian_pattern.match(lastname):
-            raise ValueError('Прізвище має містити лише символи українського алфавіту та апостроф.')
-
-        self.__lastname = lastname.capitalize()
+        if lastname == "_":
+            self.__lastname = ""
+        else:
+            self.__lastname = lastname.capitalize()
 
     def get_lastname(self) -> str:
         """
@@ -68,16 +63,11 @@ class Customer:
 
         :param firstname: The first name.
         :type firstname: str
-        :raises ValueError: If the first name has an invalid length or contains invalid characters.
         """
-        if len(firstname) < 2 or len(firstname) > 30:
-            raise ValueError('Ім\'я має містити від 2 до 30 символів')
-
-        ukrainian_pattern = re.compile(r"^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']+?$")
-        if not ukrainian_pattern.match(firstname):
-            raise ValueError('Ім\'я має містити лише символи українського алфавіту та апостроф.')
-
-        self.__firstname = firstname.capitalize()
+        if firstname == "_":
+            self.__firstname = ""
+        else:
+            self.__firstname = firstname.capitalize()
 
     def get_firstname(self) -> str:
         """
@@ -94,16 +84,11 @@ class Customer:
 
         :param middle_name: The middle name.
         :type middle_name: str
-        :raises ValueError: If the middle name has an invalid length or contains invalid characters.
         """
-        if len(middle_name) < 2 or len(middle_name) > 30:
-            raise ValueError('По батькові має містити від 2 до 30 символів')
-
-        ukrainian_pattern = re.compile(r"^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']+?$")
-        if not ukrainian_pattern.match(middle_name):
-            raise ValueError('По батькові має містити лише символи українського алфавіту та апостроф.')
-
-        self.__middle_name = middle_name.capitalize()
+        if middle_name == "_":
+            self.__middle_name = ""
+        else:
+            self.__middle_name = middle_name.capitalize()
 
     def get_middle_name(self) -> str:
         """
@@ -120,12 +105,11 @@ class Customer:
 
         :param phone_number: The phone number.
         :type phone_number: str
-        :raises ValueError: If the phone number has an invalid length or contains non-digit characters.
         """
-        if len(phone_number) != 10 or not phone_number.isdigit():
-            raise ValueError('Номер телефону повинен містити рівно 10 цифр.')
-
-        self.__phone_number = phone_number
+        if phone_number == "_":
+            self.__phone_number = ""
+        else:
+            self.__phone_number = phone_number
 
     def get_phone_number(self) -> str:
         """
@@ -142,12 +126,11 @@ class Customer:
 
         :param passport_series: The passport series.
         :type passport_series: str
-        :raises ValueError: If the passport series has an invalid length or contains non-alphabetic characters.
         """
-        if len(passport_series) != 2 or not passport_series.isalpha():
-            raise ValueError('Серія паспорту повинна містити рівно 2 літери.')
-
-        self.__passport_series = passport_series.upper()
+        if passport_series == "_":
+            self.__passport_series = ""
+        else:
+            self.__passport_series = passport_series.upper()
 
     def get_passport_series(self) -> str:
         """
@@ -164,12 +147,11 @@ class Customer:
 
         :param passport_number: The passport number.
         :type passport_number: str
-        :raises ValueError: If the passport number has an invalid length or contains non-digit characters.
         """
-        if len(passport_number) != 6 or not passport_number.isdigit():
-            raise ValueError('Номер паспорту повинен містити рівно 6 цифр.')
-
-        self.__passport_number = passport_number
+        if passport_number == "_":
+            self.__passport_number = ""
+        else:
+            self.__passport_number = passport_number
 
     def get_passport_number(self) -> str:
         """
@@ -186,14 +168,11 @@ class Customer:
 
         :param passport_issued_by: The entity that issued the passport.
         :type passport_issued_by: str
-        :raises ValueError: If the passport issued by contains non-Ukrainian alphabet characters, apostrophe, space, or punctuation marks.
         """
-
-        ukrainian_pattern = re.compile(r"^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s'-.,]+?$")
-        if not ukrainian_pattern.match(passport_issued_by):
-            raise ValueError('Має містити лише символи українського алфавіту, апостроф, пробіл або розділові знаки.')
-
-        self.__passport_issued_by = passport_issued_by
+        if passport_issued_by == "_":
+            self.__passport_issued_by = ""
+        else:
+            self.__passport_issued_by = passport_issued_by
 
     def get_passport_issued_by(self) -> str:
         """
@@ -210,17 +189,15 @@ class Customer:
 
         :param passport_issued_date: The passport issued date in the format "dd.mm.yyyy".
         :type passport_issued_date: str
-        :raises ValueError: If the passport issued date has an invalid format or is a future date.
         """
-        try:
-            passport_issued_date = datetime.strptime(passport_issued_date, '%d.%m.%Y').date()
-        except ValueError:
-            raise ValueError('Недійсний формат дати.')
-
-        if not isinstance(passport_issued_date, date) or passport_issued_date > date.today():
-            raise ValueError('Дата вказано невірно.')
-
-        self.__passport_issued_date = passport_issued_date
+        if passport_issued_date == "_":
+            self.__passport_issued_date = ""
+        else:
+            try:
+                passport_issued_date = datetime.strptime(passport_issued_date, '%d.%m.%Y').date()
+            except ValueError:
+                raise ValueError('Недійсний формат дати.')
+            self.__passport_issued_date = passport_issued_date
 
     def get_passport_issued_date(self) -> date:
         """
@@ -237,15 +214,11 @@ class Customer:
 
         :param registration_address: The registration address.
         :type registration_address: str
-        :raises ValueError: If the registration address contains non-Ukrainian alphabet characters, apostrophe, space, digits, or punctuation marks.
         """
-
-        ukrainian_pattern = re.compile(r"^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ\s\d'.,/-]+?$")
-        if not ukrainian_pattern.match(registration_address):
-            raise ValueError(
-                'Має містити лише символи українського алфавіту, апостроф, пробіл,розділові знаки або цифри.')
-
-        self.__registration_address = registration_address
+        if registration_address == "_":
+            self.__registration_address = ""
+        else:
+            self.__registration_address = registration_address
 
     def get_registration_address(self) -> str:
         """
@@ -262,12 +235,11 @@ class Customer:
 
         :param id_code: The identification code.
         :type id_code: str
-        :raises ValueError: If the identification code has an invalid length or contains non-digit characters.
         """
-        if len(id_code) != 10 or not id_code.isdigit():
-            raise ValueError('Ідентифікаційний код повинен містити рівно 10 цифр.')
-
-        self.__id_code = id_code
+        if id_code == "_":
+            self.__id_code = ""
+        else:
+            self.__id_code = id_code
 
     def get_id_code(self) -> str:
         """

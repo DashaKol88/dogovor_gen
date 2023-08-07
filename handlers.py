@@ -13,7 +13,6 @@ from telegram.ext import (
 from pdf_service.pdf_generator import generate_pdf_with_jinja
 from userdata import *
 
-
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
@@ -48,7 +47,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         "3. Отримайте договір у форматі PDF\n"
         "Відправте /cancel для того щоб зупинити мене.\n\n")
 
-    await update.message.reply_text("Введіть, будь ласка, Ваше прізвище:")
+    await update.message.reply_text("Введіть, будь ласка, Ваше прізвище. Щоб залишити порожнім введіть _")
 
     return LAST_NAME
 
@@ -74,7 +73,7 @@ async def lastname(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return LAST_NAME
 
-    await update.message.reply_text("Введіть, будь ласка, Ваше ім'я:")
+    await update.message.reply_text("Введіть, будь ласка, Ваше ім'я. Щоб залишити порожнім введіть _")
     return FIRST_NAME
 
 
@@ -99,7 +98,7 @@ async def firstname(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return FIRST_NAME
 
-    await update.message.reply_text("Введіть, будь ласка, Ваше по батькові:")
+    await update.message.reply_text("Введіть, будь ласка, Ваше по батькові. Щоб залишити порожнім введіть _")
 
     return MIDDLE_NAME
 
@@ -125,7 +124,7 @@ async def middle_name(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return MIDDLE_NAME
 
-    await update.message.reply_text("Введіть, будь ласка, свій номер телефону (10 цифр):")
+    await update.message.reply_text("Введіть, будь ласка, свій номер телефону. Щоб залишити порожнім введіть _")
 
     return PHONE_NUM
 
@@ -150,7 +149,7 @@ async def phonenum(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return PHONE_NUM
 
-    await update.message.reply_text("Введіть, будь ласка, серію паспорту:")
+    await update.message.reply_text("Введіть, будь ласка, серію паспорту. Щоб залишити порожнім введіть _")
     return P_SER
 
 
@@ -174,7 +173,7 @@ async def pas_ser(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return P_SER
 
-    await update.message.reply_text("Введіть, будь ласка, номер паспорту:")
+    await update.message.reply_text("Введіть, будь ласка, номер паспорту. Щоб залишити порожнім введіть _")
     return P_NUM
 
 
@@ -198,7 +197,7 @@ async def pas_num(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return P_NUM
 
-    await update.message.reply_text("Введіть, будь ласка, ким виданий паспорт:")
+    await update.message.reply_text("Введіть, будь ласка, ким виданий паспорт. Щоб залишити порожнім введіть _")
     return P_ISS_B
 
 
@@ -223,7 +222,7 @@ async def pas_iss_by(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         return P_ISS_B
 
     await update.message.reply_text(
-        f"Введіть, будь ласка, дату видачі паспорту у форматі день.місяць.рік (наприклад, {date.today().strftime('%d.%m.%Y')}):")
+        f"Введіть, будь ласка, дату видачі паспорту у форматі день.місяць.рік (наприклад, {date.today().strftime('%d.%m.%Y')}). Щоб залишити порожнім введіть _")
     return P_ISS_D
 
 
@@ -247,7 +246,7 @@ async def pas_iss_date(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return P_ISS_D
 
-    await update.message.reply_text("Введіть, будь ласка, адресу реестрації:")
+    await update.message.reply_text("Введіть, будь ласка, адресу реестрації. Щоб залишити порожнім введіть _")
     return REG_ADDR
 
 
@@ -271,7 +270,7 @@ async def reg_address(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
         await context.bot.send_message(chat_id=update.message.chat_id, text=str(err))
         return REG_ADDR
 
-    await update.message.reply_text("Введіть, будь ласка, ідентифікаційний код:")
+    await update.message.reply_text("Введіть, будь ласка, ідентифікаційний код. Щоб залишити порожнім введіть _")
     return TAX_ID
 
 
